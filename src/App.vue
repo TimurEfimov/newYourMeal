@@ -3,6 +3,7 @@
     <theHeader />
     <div class="container xl mx-auto">
       <theNavigation :navigation="navigation" />
+      <theCart />
     </div>
   </div>
 </template>
@@ -12,6 +13,7 @@ import { watch, ref, defineProps } from 'vue';
 import axios from 'axios';
 import theHeader from './components/theHeader.vue'
 import theNavigation from './components/theNavigation.vue'
+import theCart from './components/theCart.vue';
 
 const navigation = ref([])
 

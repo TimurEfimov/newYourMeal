@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-between pt-[38px]">
+  <div class="flex items-center gap-x-6 overflow-x-scroll pt-[38px]" >
     <navCard
     v-for="item in navigation"
     :key="item.id"
@@ -9,6 +9,10 @@
     />
   </div>
 </template>
+
+<style scoped>
+
+</style>
 
 <script setup>
 import navCard from './navCard.vue';
