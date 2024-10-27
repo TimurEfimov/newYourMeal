@@ -10,6 +10,7 @@
       </div>
     </div>
   </div>
+  <theFooter />
 </template>
 
 <style scoped>
@@ -23,6 +24,7 @@ import theHeader from './components/theHeader.vue'
 import theNavigation from './components/theNavigation.vue'
 import theCart from './components/theCart.vue'
 import listCard from './components/listCard.vue'
+import theFooter from './components/theFooter.vue'
 
 const navigation = ref([])
 
