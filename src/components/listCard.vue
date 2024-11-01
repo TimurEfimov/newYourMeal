@@ -1,15 +1,21 @@
 <template>
-    <div class="grid grid-cols-3 gap-[30px]">
-        <theCard />
-        <theCard />
-        <theCard />
-        <theCard />
-        <theCard />
-        <theCard />
-    </div>
+  <div class="grid grid-cols-3 gap-[30px]">
+    <theCard
+      v-for="item in card"
+      :key="item.id"
+      :id="item.id"
+      :title="item.title"
+      :imgUrl="item.imgUrl"
+      :price="item.price"
+      :weight="item.weight"
+    />
+  </div>
 </template>
 
 <script setup>
-import TheCard from './theCard.vue';
+import TheCard from './theCard.vue'
 
+defineProps({
+  card: Array,
+})
 </script>
