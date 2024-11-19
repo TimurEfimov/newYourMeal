@@ -9,8 +9,17 @@
       />
       <h2 class="text-[40px] font-semibold mt-[50px] mb-6">Бургеры</h2>
       <div class="flex gap-[30px]">
-        <theCart />
-        <listCard :card="items[navItem]" />
+        <theCart
+          :cart="busket"
+          :totalPrice="totalPrice"
+          :totalBusket="totalBusket"
+          @addToBusket="id => plusBusket(id)"
+          @minusBusket="id => minusBusket(id)"
+        />
+        <listCard
+          :card="items[navItem]"
+          @addToCart="item => addToBusket(item)"
+        />
       </div>
     </div>
   </div>
@@ -20,7 +29,7 @@
 <style scoped></style>
 
 <script setup>
-import { watch, ref, defineProps, onMounted } from 'vue'
+import { watch, ref, defineProps, onMounted, computed } from 'vue'
 import axios from 'axios'
 import theHeader from './components/theHeader.vue'
 import theNavigation from './components/theNavigation.vue'
@@ -30,7 +39,14 @@ import theFooter from './components/theFooter.vue'
 
 const navigation = ref([])
 const items = ref([])
+const busket = ref([])
 const navItem = ref('burgers')
+
+const totalPrice = computed(() =>
+  busket.value.reduce((acc, item) => acc + item.price, 0),
+)
+
+const totalBusket = computed(() => busket.value.length)
 
 const fetchNavigation = async () => {
   try {
@@ -51,6 +67,39 @@ const fetchItems = async () => {
     items.value = data[0]
   } catch (err) {
     console.log(err)
+  }
+}
+
+const addToBusket = item => {
+  for (let i of busket.value) {
+    if (i.id === item.id) {
+      i.count++
+    } else {
+      busket.value.push(item)
+      item.count = 1
+    }
+  }
+}
+
+const plusBusket = id => {
+  console.log(id)
+  for (let i of busket.value) {
+    if (i.id === id) {
+      i.count++
+    }
+  }
+}
+
+const minusBusket = id => {
+  console.log(id)
+  for (let i of busket.value) {
+    if (i.id === id) {
+      i.count--
+      if (i.count < 1) {
+        let ind = busket.value.indexOf(i)
+        busket.value.splice(ind, 1)
+      }
+    }
   }
 }
 
