@@ -43,7 +43,7 @@ const busket = ref([])
 const navItem = ref('burgers')
 
 const totalPrice = computed(() =>
-  busket.value.reduce((acc, item) => acc + item.price, 0),
+  busket.value.reduce((acc, item) => acc + (item.price * item.count), 0),
 )
 
 const totalBusket = computed(() => busket.value.length)
@@ -71,13 +71,21 @@ const fetchItems = async () => {
 }
 
 const addToBusket = item => {
-  for (let i of busket.value) {
-    if (i.id === item.id) {
-      i.count++
-    } else {
-      busket.value.push(item)
-      item.count = 1
+  if (busket.value.length >= 1) {
+    for (let i of busket.value) {
+      if (i.id === item.id) {
+        i.count++
+        console.log(52)
+      } else {
+        item.count = 1
+        busket.value.push(item)
+        console.log(42)
+      }
+      break
     }
+  } else {
+    item.count = 1
+    busket.value.push(item)
   }
 }
 
