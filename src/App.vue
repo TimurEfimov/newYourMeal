@@ -71,22 +71,15 @@ const fetchItems = async () => {
 }
 
 const addToBusket = item => {
-  if (busket.value.length >= 1) {
     for (let i of busket.value) {
       if (i.id === item.id) {
         i.count++
-        console.log(52)
-      } else {
-        item.count = 1
-        busket.value.push(item)
-        console.log(42)
-      }
-      break
+        return 'ok'
+      } 
     }
-  } else {
     item.count = 1
     busket.value.push(item)
-  }
+  
 }
 
 const plusBusket = id => {
